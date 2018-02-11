@@ -1,0 +1,97 @@
+﻿@model APEXUI.Models.EmployerBO
+@{
+    ViewBag.Title = "Employer Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Employer Details</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.CompName)</td>
+
+                    <td>
+                        DUNSNumber
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.DUNSNumber)</td>
+
+                </tr>
+                <tr></tr>
+                <tr><td>About</td><td>@Html.TextBoxFor(x => x.Description)</td></tr>
+
+                <tr></tr>
+                
+                <tr>
+                    <td>
+                        Revenue
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.RevenueAmount)</td>
+                    <td>Currency </td>
+                    <td>@Html.TextBoxFor(x => x.Currency)</td>
+                </tr>
+
+                <tr><td>Employer Address</td></tr>
+                <tr>
+                    <td>
+                        street
+                    </td>
+                    <td>@Html.TextBoxFor(x =>x.WorkAdd.street)</td>
+                    <td>
+                        city
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.WorkAdd.city)</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        state
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.WorkAdd.state)</td>
+                    <td>
+                        country
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.WorkAdd.country)</td>
+                </tr>
+
+                <tr></tr>
+                <tr>
+                    <td>
+                        Zipcode
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.WorkAdd.Zipcode)</td>
+                </tr>
+                <tr>
+                    <td>
+                        fromdate
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.WorkAdd.fromdate)</td>
+                    <td>
+                        Todate
+                    </td>
+                    <td>@Html.TextBoxFor(x => x.WorkAdd.Todate)</td>
+                </tr>
+                <tr></tr>
+
+            </table>
+        </div>
+        <div class="row margin-bottom-70">
+            <div class="col-md-12">
+                <table>
+                    <tr>
+                        <td><button type="submit" class="btn-u btn-block rounded" style="border-radius: 7px; width: 100px;">Save</button></td>
+                        <td></td>
+                        @*<td><button type="submit" class="btn-u btn-block rounded" style="border-radius: 7px; width: 100px;">Cancel</button></td>*@
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+    }
+</body>

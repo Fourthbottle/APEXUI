@@ -1,0 +1,156 @@
+﻿@model APEXUI.Models.RegistrationBO
+
+@{
+    ViewBag.Title = "APEX | Login";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+<link rel="stylesheet" href="~/Content/dist/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="~/Content/dist/css/line-icons/line-icons.css">
+<link rel="stylesheet" href="~/Content/dist/css/style.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/dist/css/page_log_reg_v4.css" type="text/css" />
+    <body>
+        <div class="wrapper">
+            <div class="section" style="overflow:hidden;">
+                <div class="container-fluid">
+                    <div class="row">
+                        @Html.Partial("_partialmaster")
+                        <div class="col-md-6">
+                            <img src="~/Content/dist/img/map.png" class="img-responsive" style="margin-left: 110px;margin-top: 50px;" />
+                        </div><div class="col-md-6 form-block" style="float:right;margin-top:31px">
+
+                        @using (Html.BeginForm())
+                        {
+                            <div class="overlay">
+                                <h2 class="top-fixed margin-bottom-30 ">Create an Account</h2>
+                                <p style="margin-top: -28px;color: #fff;"> @Html.Raw(HttpUtility.HtmlDecode((Html.ValidationSummary(false, "", new { @class = "error" })).ToHtmlString()))</p>
+                                <div class="login-block">
+                                    <div class="input-group margin-bottom-30" style="width:100%" ;>
+                                        <span class="input-group-addon rounded-left">
+                                            <i class="icon-user "></i>
+                                        </span>
+                                        @Html.TextBoxFor(x => x.email, new { @class = "form-control  rounded-right", @id = "customerid", placeholder = "Email ID", required = "required", style = "background: #fff;" })
+                                    </div>
+                                    <div class="input-group margin-bottom-30" style="width:100%" ;>
+                                        <span class="input-group-addon rounded-left">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                        @Html.PasswordFor(x => x.password, new { @class = "form-control  rounded-right", @id = "password1", placeholder = "Password", required = "required", style = "background: #fff;" })
+                                    </div>
+                                    <div class="input-group margin-bottom-30" style="width:100%" ;>
+                                        <span class="input-group-addon rounded-left">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                        @Html.PasswordFor(x => x.password, new { @class = "form-control  rounded-right", @id = "password", placeholder = "Confirm Password", required = "required", style = "background: #fff;" })
+                                    </div>
+                                    <div class="input-group margin-bottom-30" style="width:100%" ;>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group" style="margin-left: -14px;">
+                                                @Html.PasswordFor(x => x.email, new { @class = "form-control  rounded-right", @id = "password", @readonly = true, style = "background: #fff;border-radius: 7px;" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group" style="margin-right: -15px;margin-left: -20px;">
+                                                <div class="input-group-addon"><i class="icon-calculator"></i></div>
+                                                @Html.PasswordFor(x => x.email, new { @class = "form-control  rounded-right", @id = "password", placeholder = "Captcha", @readonly = true, style = "background: #fff;" })
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row margin-bottom-70">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn-u btn-block rounded" style="border-radius: 7px;">Create an Account</button>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+
+                        }
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="section ">
+                    <div class="container-fluid back">
+                        <div class="row">
+                            <div style="padding: 16px 12px 0 20px;">
+                                <div class="col-md-6  pull-right global-text">
+                                    <p class="text-right">
+                                        ©
+                                        <script>                               document.write(new Date().getFullYear())</script> APEX. All Right Reserved.
+                                    </p>
+
+                                </div>
+                                <div class="col-md-6 pull-left Copyright-txt">
+                                    <p class="text-left">Powered by<span style="color:#5590d2;"> Fourth Bottle<span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+        @*<input type="password" />*@
+@*<div class="alert alert-success" role="alert">
+        <div class="container">
+            <div class="alert-icon">
+                <i class="now-ui-icons ui-2_like"></i>
+            </div>
+            <strong>Well done!</strong> You successfully read this important alert message.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="alert alert-info" role="alert">
+        <div class="container">
+            <div class="alert-icon">
+                <i class="now-ui-icons travel_info"></i>
+            </div>
+            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="alert alert-warning" role="alert">
+        <div class="container">
+            <div class="alert-icon">
+                <i class="now-ui-icons ui-1_bell-53"></i>
+            </div>
+            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="alert alert-danger" role="alert">
+        <div class="container">
+            <div class="alert-icon">
+                <i class="now-ui-icons objects_support-17"></i>
+            </div>
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </span>
+            </button>
+        </div>
+    </div>*@

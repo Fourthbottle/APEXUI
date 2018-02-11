@@ -1,0 +1,173 @@
+
+body {
+   color: #fff;
+   font-size: 13px;
+   line-height: 1.6;
+   /*background:url(../img/loginbg.jpg);*/
+       background: linear-gradient(white, #D3D8E8);
+   background-size:cover;
+  
+    }
+	p
+	{
+		color:#747373;
+	}
+	
+wrapper
+       {
+	background:transparent;
+	position:relative;
+    }
+@font-face
+    {
+	    font-family:BOOMBOX;
+	    src: url(../font/BOOMBOX.ttf)
+    }
+	
+.text-head
+       {
+		font-family:BOOMBOX;
+        font-size:33px;		
+	}
+.caption
+       {
+		font-size:20px;
+        color: #969595;		
+	}
+.text-wrap
+       {
+		padding:20px;   
+	}
+.form-block
+       {  
+        padding: 120px 163px 0;
+	    
+	}
+.overlay
+       {
+		background:rgb(59, 89, 152);
+		border:1px solid #555;
+		padding:15px;
+        border-radius:5px;		
+    }
+
+.top-fixed
+       {
+		margin-top:0px;   
+	}
+.margin-bottom-20
+       {
+	    margin-bottom:10px;
+    }
+.margin-bottom-30
+       {
+	    margin-bottom:30px;
+    }
+.input-group-addon
+       {
+		width: 40px;
+        background: transparent;
+        border-color: rgba(214,214,214,.5);
+        padding-right:0px;
+        color: #b3b3b3;
+         font-size: 14px;
+        border-left:1px solid #ccc;	
+        padding: 6px 0px !important;	 
+    }
+
+.rounded-left {
+    border-radius: 4px 0 0 4px !important;
+}
+.btn-u 
+      {
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 6px 13px;
+    position: relative;
+       background: #5590d2;
+    white-space: nowrap;
+    display: inline-block;
+    text-decoration: none;
+   }
+.btn-u :hover
+       {
+	background:#5590d2;   
+	}
+.back
+       {
+	position:absolute;
+	background:black;
+    bottom:0;
+    left:0;
+	right:0;
+
+    width:100%;
+     	
+	}
+.common
+       {	
+    padding-left:30px;
+    padding-right:30px;	
+	}
+.form-block h2
+{
+	font-size: 24px;
+	    margin-top: 5px;
+}
+.btn-u:hover
+{
+	background:#5590d2;
+	transition: 0.5s;
+}
+@media (max-width:767px)
+ {
+	.form-block
+       {  
+    padding: 14px 25px 122px 25px;  
+	}
+    .Copyright-txt 
+	{
+    float: none !important;
+    text-align: center !important;
+	}
+	.Copyright-txt p
+	{
+    float: none !important;
+    text-align: center !important;
+	}
+    .global-text 
+	{
+	float: none !important;
+    text-align: center !important;	
+	}	
+	.global-text p
+	{
+	float: none !important;
+    text-align: center !important;	
+	}	
+ }	
+	.text
+	{
+	    font-size:16px;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

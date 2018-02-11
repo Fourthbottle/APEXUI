@@ -1,0 +1,90 @@
+﻿@model APEXUI.Models.RegistrationBO
+
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+<link rel="stylesheet" href="~/Content/dist/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="~/Content/dist/css/line-icons/line-icons.css">
+<link rel="stylesheet" href="~/Content/dist/css/style.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/dist/css/page_log_reg_v4.css" type="text/css" />
+
+@using (Html.BeginForm())
+{
+    <body>
+        <div class="wrapper">
+            <div class="section" style="overflow:hidden;">
+                <div class="container-fluid">
+                    <div class="row">
+                        @Html.Partial("_innerpartialmaster")
+                       
+
+                        <div class="col-md-6 form-block" style="float:right;margin-top:31px;     margin-right: 360px;">
+                            <div class="overlay"> 
+                                <h2 class="top-fixed margin-bottom-30 ">Login</h2>
+                                <p style="margin-top: -28px;color: #fff;"> It's free and always will be.</p>
+                                <div class="login-block">
+                                    <div class="input-group margin-bottom-30" style="width:100%" ;>
+                                        <span class="input-group-addon rounded-left">
+                                            <i class="icon-user "></i>
+                                        </span>
+                                        @Html.TextBoxFor(x => x.email, new { @class = "form-control  rounded-right", @id = "customerid", placeholder = "User Name / Email ID", required = "required", style = "background: #fff;" })
+                                    </div>
+                                    <div class="input-group margin-bottom-30" style="width:100%" ;>
+                                        <span class="input-group-addon rounded-left">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                        @Html.PasswordFor(x => x.password, new { @class = "form-control  rounded-right", @id = "password1", placeholder = "Password", required = "required", style = "background: #fff;" })
+                                    </div>
+                                
+                                 
+                                  
+                                    <div class="row margin-bottom-70">
+                                        <div class="col-md-12">
+
+                                            @*<asp:Button ID="btn_submit" runat="server" class="btn-u btn-block rounded"
+                                                Text="Submit" onclick="btn_submit_Click" />*@
+                                            <button type="submit" class="btn-u btn-block rounded" style="border-radius: 7px;">Login</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="section ">
+                    <div class="container-fluid back">
+                        <div class="row">
+                            <div style="padding: 16px 12px 0 20px;">
+                                <div class="col-md-6  pull-right global-text">
+                                    <p class="text-right">
+                                        ©
+                                        <script>                               document.write(new Date().getFullYear())</script> APEX. All Right Reserved.
+                                    </p>
+
+                                </div>
+                                <div class="col-md-6 pull-left Copyright-txt">
+                                    <p class="text-left">Powered by<span style="color:#5590d2;"> Fourth Bottle<span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+
+
+
+}
+

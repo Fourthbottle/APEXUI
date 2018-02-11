@@ -1,0 +1,75 @@
+﻿@model APEXUI.Models.EmployeeDetailsBO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<style type="text/css">
+    .table-borderless td,
+.table-borderless th {
+    border: 0;
+}
+</style>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <b> Profile Details </b> @Html.Raw(HttpUtility.HtmlDecode((Html.ValidationSummary(false, "", new { @class = "error" })).ToHtmlString()))
+        <a href="/Employee/Edit">
+            <span class="pull-right glyphicon glyphicon-pencil"></span>
+        </a>
+    </div>
+    <div class="panel-body">
+        <br />
+        <br />
+        <table class="table table-borderless table-condensed table-hover">
+            <tr>
+                <td class="col-md-3">
+                    <label class="form-control-static">First name </label>
+                </td>
+                <td>
+                    @Html.ValueFor(x => x.FirstName)
+                </td>
+                <td>
+                    <p class="hidden"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label class="form-control-static">Last name </label>
+                </td>
+                <td>
+                    @Html.ValueFor(x => x.LastName)
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="form-control-static">Mobile number</label>
+                </td>
+                <td>
+                  @Html.ValueFor(x => x.countryCode) <b>-</b> @Html.ValueFor(x => x.MobileNumber)
+                </td>
+                <td>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label class="form-control-static">SSN</label>
+                </td>
+                <td>
+                    *****@Html.ValueFor(x => x.SSN)
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

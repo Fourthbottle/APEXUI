@@ -1,0 +1,109 @@
+﻿@model IEnumerable<APEXUI.Models.SkillsBO>
+
+@{
+    ViewBag.Title = "Youhave";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="~/Content/Skills.js"></script>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <b>Skillset</b>
+        <a href="#" data-toggle="modal" data-target="#myModal">
+            <span class="pull-right glyphicon glyphicon-plus"></span>
+        </a>
+        @Html.Raw(HttpUtility.HtmlDecode((Html.ValidationSummary(false, "", new { @class = "error" })).ToHtmlString()))
+    </div>
+    <input type="hidden" id="hdnSkillRow" />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th>Used</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{ int rowNo = 0; }
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    rowNo = rowNo + 1;
+                    <tr id=rowNo>
+                        <td>@item.Skill</td>
+                        <td>@item.UsedExperience</td>
+                    </tr>
+
+                    <script type="text/javascript">
+                        $('#hdnSkillRow').val(@rowNo);
+                    </script>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="panel-body">
+        <div id="div1"></div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Add your skills
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @* Form design start here *@
+                    <b>Skill Details</b><br /><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><input type="text" class="form-control" id="txtSkillName" placeholder="Skill (or) Technology" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-inline">
+                                        <select class="form-control" id="ddlyears">
+                                            <option value="Select"> Select </option>
+                                            @for (int i = 0; i < 50; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        <span>Years</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <select class="form-control" id="ddlmonths">
+                                            <option value="Select"> Select </option>
+                                            @for (int i = 0; i < 13; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select><span> Months</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="InsSkills()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

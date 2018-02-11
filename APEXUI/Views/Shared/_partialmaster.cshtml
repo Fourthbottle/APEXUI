@@ -1,0 +1,62 @@
+﻿@model APEXUI.Models.RegistrationBO
+@{
+    Layout = null;
+
+}
+<div class="navbar navbar-default" style="background-color:#3b5998;">
+    <div class="container-fluid">
+        <div class="col-md-4">
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#"><h2 class="text-head" style="margin-top: 6px;"><span style="color:#fff;">APEX</span></h2></a>
+            </div>
+
+        </div>
+        <div class="col-md-8 ">
+            <div class="overlay" style="float: right;    background-color: #3b5998;    border: none;">
+                @*<h2 class="top-fixed margin-bottom-30">Login To Your Account</h2>*@
+                <div class="row ">
+                    <div class="login-block">
+                        <div class="input-group ">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="icon-user "></i></div>
+                                    @*<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">*@
+                                    @Html.TextBoxFor(x => x.email, new { @class = "form-control  rounded-right", @id = "customerid", placeholder = "User Name", required = "required" })
+                               </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="icon-lock"></i></div>
+                                    @*<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">*@
+                                    @Html.PasswordFor(x => x.password, new { @class = "form-control  rounded-right", @id = "password1", placeholder = "Password", required = "required" })
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                @*<button type="submit" class="btn btn-primary">Transfer cash</button>*@
+                                <button type="button" class="btn-u btn-block rounded" onclick="return onregisterbuttonclick();" style="border-radius: 7px;">Login</button>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
+<script>
+
+                //function onregisterbuttonclick() {
+                //    document.GetElementById('customerid').required;
+                //    document.GetElementById('password1').required ;
+                //}
+
+</script>

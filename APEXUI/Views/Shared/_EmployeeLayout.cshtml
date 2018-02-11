@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/EmployeeLayout.css" rel="stylesheet" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+    <link rel="stylesheet" href="~/Content/dist/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/dist/css/line-icons/line-icons.css">
+    <link rel="stylesheet" href="~/Content/dist/css/style.css" type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/page_log_reg_v4.css" type="text/css" />
+    
+    <script type="text/javascript">
+        $(function () {
+            $('.navbar-toggle').click(function () {
+                $('.navbar-nav').toggleClass('slide-in');
+                $('.side-body').toggleClass('body-slide-in');
+                $('#search').removeClass('in').addClass('collapse').slideUp(200);
+
+                /// uncomment code for absolute positioning tweek see top comment in css
+                //$('.absolute-wrapper').toggleClass('slide-in');
+
+            });
+
+            // Remove menu for searching
+            $('#search-trigger').click(function () {
+                $('.navbar-nav').removeClass('slide-in');
+                $('.side-body').removeClass('body-slide-in');
+
+                /// uncomment code for absolute positioning tweek see top comment in css
+                //$('.absolute-wrapper').removeClass('slide-in');
+
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="navbar navbar-default" style="background-color:#3b5998;">
+        <div class="container-fluid">
+            <div class="col-md-12" style=" margin-bottom 12px;">
+                <div class="navbar-header">
+
+                    <a class="navbar-brand" href="#"><h2 class="text-head" style="margin-top: 2px;"><span style="color:#fff;">APEX</span></h2></a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <!-- uncomment code for absolute positioning tweek see top comment in css -->
+        <!-- <div class="absolute-wrapper"> </div> -->
+        <!-- Menu -->
+        <div class="side-menu">
+
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                @*<div class="navbar-header">
+                        <div class="brand-wrapper">
+                            <!-- Hamburger -->
+                            <button type="button" class="navbar-toggle">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- Brand -->
+                            <div class="brand-name-wrapper">
+                                <a class="navbar-brand" href="#">
+                                    Brand
+                                </a>
+                            </div>
+                            <!-- Search -->
+                            <a data-toggle="collapse" href="#search" class="btn btn-default" id="search-trigger">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </a>
+                            <!-- Search body -->
+                            <div id="search" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <form class="navbar-form" role="search">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Search">
+                                        </div>
+                                        <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-ok"></span></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                <!-- Main Menu -->
+                <div class="side-menu-container">
+                    <ul class="nav navbar-nav">
+                        @*class="active"*@
+                        <li><a href="~/Employee/Details"><span class="glyphicon glyphicon-send"></span>Basic Details </a></li>
+                        <li><a href="~/WorkHistory/Details"><span class="glyphicon glyphicon-plane"></span>Work History</a></li>
+                        <li><a href="~/Skill/YouHave"><span class="glyphicon glyphicon-grain"></span>SkillSet</a> </li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Address History</a></li>
+                        <!-- Dropdown-->
+                        @*<li class="panel panel-default" id="dropdown">
+                                <a data-toggle="collapse" href="#dropdown-lvl1">
+                                    <span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span>
+                                </a>
+                                <!-- Dropdown level 1 -->
+                                <div id="dropdown-lvl1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="#">Link</a></li>
+                                            <li><a href="#">Link</a></li>
+                                            <li><a href="#">Link</a></li>
+                                            <!-- Dropdown level 2 -->
+                                            <li class="panel panel-default" id="dropdown">
+                                                <a data-toggle="collapse" href="#dropdown-lvl2">
+                                                    <span class="glyphicon glyphicon-off"></span> Sub Level <span class="caret"></span>
+                                                </a>
+                                                <div id="dropdown-lvl2" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <ul class="nav navbar-nav">
+                                                            <li><a href="#">Link</a></li>
+                                                            <li><a href="#">Link</a></li>
+                                                            <li><a href="#">Link</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>*@
+                        
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+
+        </div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div style="color:black">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

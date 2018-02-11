@@ -1,0 +1,380 @@
+﻿@model IEnumerable<APEXUI.Models.WorkHistoryBO>
+@{
+    ViewBag.Title = "WorkHistory";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<script src="~/Content/WorkHistory.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a[name=updt]').click(function (event) {
+            var id = $(this).attr('id');
+            //alert(id);
+            $("#btnUpdate").val(id);
+            var workDetails = JSON.parse(document.getElementById("data_" + id).value);
+            $("#txtupdateCompanyname").val(workDetails.compName);
+            $("#txtupdateLocation").val(workDetails.workLocation.street);
+            $("#txtupdateCity").val(workDetails.workLocation.city);
+            $("#txtupdateState").val(workDetails.workLocation.state);
+            $("#txtupdateCountry").val(workDetails.workLocation.country);
+            $("#txtupdatefromDate").val(workDetails.WorkRoles.FromDate);
+            $("#txtupdateToDate").val(workDetails.WorkRoles.ToDate);
+            $("#txtupdateDesignation").val(workDetails.WorkRoles.Designation);
+            $("#txtupdateEmploymentId").val(workDetails.EmploymentId);
+            var empType = document.getElementById("ddlupdateEmpType");
+            empType.options[workDetails.WorkRoles.EmpType - 1].selected = true;
+            $("#txtupdateRolesResponsibilities").val(workDetails.Responsibility);
+            $("#txtupdateManagerName").val(workDetails.manager.MgrFullName);
+            $("#txtupdateManagerEmail").val(workDetails.manager.MgrEmail);
+            $("#txtupdateManagerCountryCode").val(workDetails.manager.MgrCountryCode);
+            $("#txtupdateMobileNumber").val(workDetails.manager.MgrMobileNumb);
+
+            if (workDetails.WorkRoles.isCurrentCompany == 1) {
+                $("#updatechkCurentcompany").prop('checked', true);
+                $("#txtupdateToDate").prop("disabled", "disabled");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#updatechkCurentcompany').click(function () {
+            if ($(this).is(':checked')) {
+                $("#txtupdateToDate").val("");
+                $('#txtupdateToDate').attr('disabled', 'disabled');
+
+            } else {
+                $('#txtupdateToDate').removeAttr("disabled");
+            }
+        });
+    });
+
+
+    function UpdateWorkHistory() {
+
+        var UpdtiscuurentCompany = 0;
+        if (document.getElementById("updatechkCurentcompany").checked)
+            UpdtiscuurentCompany = 1;
+
+        var workULocation = {
+            street: $("#txtupdateLocation").val(),
+            city: $("#txtupdateCity").val(),
+            state: $("#txtupdateState").val(),
+            country: $("#txtupdateCountry").val()
+        }
+
+        var managerU = {
+            MgrFullName: $("#txtupdateManagerName").val(),
+            MgrEmail: $("#txtupdateManagerEmail").val(),
+            MgrCountryCode: $("#txtupdateManagerCountryCode").val(),
+            MgrMobileNumb: $("#txtupdateMobileNumber").val()
+        }
+
+        var WorkURoles = {
+            FromDate: $("#txtupdatefromDate").val(),
+            ToDate: $("#txtupdateToDate").val(),
+            Designation: $("#txtupdateDesignation").val(),
+            EmpType: document.getElementById("ddlupdateEmpType").value,
+            isCurrentCompany: UpdtiscuurentCompany
+        }
+
+
+        var WorkHistoryUBO = {
+            compId: '',
+            compName: $("#txtupdateCompanyname").val(),
+            workLocation: workULocation,
+            manager: managerU,
+            WorkRoles: WorkURoles,
+            Responsibility: $("#txtupdateRolesResponsibilities").val(),
+            EmploymentId: $("#txtupdateEmploymentId").val(),
+            EmpId: '',
+            WHID: document.getElementById("btnUpdate").value
+        }
+
+        $.ajax({
+            url: '/WorkHistory/UpdateWorkHistory',
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                alert('details Updated Successfully');
+                $('#UpdateModal').modal('hide');
+            },
+            data: WorkHistoryUBO,
+            error: function (response) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+            }
+        });
+
+    }
+
+
+    $(document).ready(function () {
+        $('a[name=delt]').click(function (event) {
+            var attrid = $(this).attr('id');
+            $('#delclick').val(attrid.substring(4, 25));
+        });
+    });
+
+    function DeleteWorkHistory() {
+
+        var wrkId = $("#delclick").val();
+        $.ajax({
+            url: '/WorkHistory/DeleteWorkHistory?id=' + wrkId,
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                var removableDiv = '#div_' + wrkId;
+                $('#DeleteModal').modal('hide');
+                $(removableDiv).remove();
+            },
+            error: function (xhr) {
+                alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+            }
+        });
+    }
+
+</script>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <b> Employment History</b>
+        <a href="#" data-toggle="modal" data-target="#myModal">
+            <span class="pull-right glyphicon glyphicon-plus"></span>
+        </a>
+        @Html.Raw(HttpUtility.HtmlDecode((Html.ValidationSummary(false, "", new { @class = "error" })).ToHtmlString()))
+    </div>
+    <br />
+    @if ( Model != null)
+    {
+        foreach (var item in Model)
+        {
+            var javaScriptSerializer = new
+            System.Web.Script.Serialization.JavaScriptSerializer();
+            string jsonString = javaScriptSerializer.Serialize(item);
+            <input type="hidden" id="data_@item.WHID" value="@jsonString" />
+            <div class="col-sm-9" id="div_@item.WHID">
+                <div class="well">
+                    <span><b>@Html.DisplayFor(modelitem => item.WorkRoles.Designation)</b></span> at <span><b>@Html.DisplayFor(modelitem => item.compName)</b></span> <span>@Html.DisplayFor(x => item.workLocation.city),</span>
+                    <span>@Html.DisplayFor(x => item.workLocation.country)</span>
+                    <div class="pull-right ">
+                        <a href="#" id="@item.WHID" name="updt" data-toggle="modal" data-target="#UpdateModal">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="#" id="del_@item.WHID" name="delt" data-toggle="modal" data-target="#DeleteModal">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    <br /><br />
+                    <span>From : </span> @Html.DisplayFor(x => item.WorkRoles.FromDate)
+                    @{
+                        if (item.WorkRoles.isCurrentCompany == 1)
+                        {
+                            <span>Current Company</span>
+                        }
+                        else
+                        {
+                            <span> To : </span><span>@Html.DisplayFor(x => item.WorkRoles.ToDate)</span>
+                        }
+                    }
+                </div>
+            </div>
+                            }
+                        }
+    <div class="panel-body">
+        <div id="div1"></div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Add Work History
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @* Form design start here *@
+                    <b>Company Details</b><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><input type="text" class="form-control" id="txtCompanyName" placeholder="Company Name" /></td>
+                                <td><input type="text" class="form-control" id="txtLocation" placeholder="Company Address" /> </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="txtCity" class="form-control" placeholder="City" /> </td>
+                                <td><input type="text" id="txtState" class="form-control" placeholder="State" /> </td>
+                                <td><input type="text" id="txtCountry" class="form-control" placeholder="Country" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <b>Employment Details</b><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-control" id="txtfromDate" placeholder="From Date" /></td>
+                                <td>
+                                    <input type="text" class="form-control" id="txtToDate" placeholder="To Date" />
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="chkCurentcompany" value="chkCurrentCompany">I Currently Work Here
+                                    </label>
+                                </td>
+                                <td><input type="text" class="form-control" id="txtDesignation" placeholder="Designation" /> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="text" class="form-control" id="txtEmploymentId" placeholder="Employee Id" /> </td>
+                                <td>
+                                    <select class="form-control" id="ddlEmpType">
+                                        <option value="1">Permanent</option>
+                                        <option value="2">Internship</option>
+                                        <option value="3">PartTime</option>
+                                        <option value="4">Contract</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><textarea placeholder="Roles and Responsibilities" class="form-control" id="txtRolesResponsibilities"></textarea> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <b>Manager Details</b><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="3"><input type="text" class="form-control" id="txtManagerName" placeholder="Manager name" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-control" id="txtManagerEmail" placeholder="Manager email" /> </td>
+                                <td><input type="text" id="txtManagerCountryCode" class="form-control col-lg-2" placeholder="Country code" /> </td>
+                                <td><input type="text" id="txtMobileNumber" class="form-control" placeholder="Contact number" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="InsWorkHistory()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Edit Work History
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @* Form design start here *@
+                    <b>Company Details</b><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><input type="text" class="form-control" id="txtupdateCompanyname" placeholder="Company Name" /></td>
+                                <td><input type="text" class="form-control" id="txtupdateLocation" placeholder="Company Address" /> </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="txtupdateCity" class="form-control" placeholder="City" /> </td>
+                                <td><input type="text" id="txtupdateState" class="form-control" placeholder="State" /> </td>
+                                <td><input type="text" id="txtupdateCountry" class="form-control" placeholder="Country" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <b>Employment Details</b><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-control" id="txtupdatefromDate" placeholder="From Date" /></td>
+                                <td>
+                                    <input type="text" class="form-control" id="txtupdateToDate" placeholder="To Date" />
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="updatechkCurentcompany" value="chkCurrentCompany">I Currently Work Here
+                                    </label>
+                                </td>
+                                <td><input type="text" class="form-control" id="txtupdateDesignation" placeholder="Designation" /> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="text" class="form-control" id="txtupdateEmploymentId" placeholder="Employee Id" /> </td>
+                                <td>
+                                    <select class="form-control" id="ddlupdateEmpType">
+                                        <option value="1">Permanent</option>
+                                        <option value="2">Internship</option>
+                                        <option value="3">PartTime</option>
+                                        <option value="4">Contract</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><textarea placeholder="Roles and Responsibilities" class="form-control" id="txtupdateRolesResponsibilities"></textarea> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <b>Manager Details</b><br />
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="3"><input type="text" class="form-control" id="txtupdateManagerName" placeholder="Manager name" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-control" id="txtupdateManagerEmail" placeholder="Manager email" /> </td>
+                                <td><input type="text" id="txtupdateManagerCountryCode" class="form-control col-lg-2" placeholder="Country code" /> </td>
+                                <td><input type="text" id="txtupdateMobileNumber" class="form-control" placeholder="Contact number" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnUpdate" onclick="UpdateWorkHistory()">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="DeleteModal" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Delete Work History
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @* Form design start here *@
+                    <b>Are you sure you want to delete your employment details ?</b><br />
+                    <br />
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="hidden" id="delclick" />
+                                <div class="col-sm-3"><button class="btn btn-danger" onclick="DeleteWorkHistory()">Okay</button></div>
+                            </td>
+                            <td>
+                                <div class="col-sm-6"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

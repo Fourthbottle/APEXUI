@@ -1,0 +1,64 @@
+﻿@model APEXUI.Models.EmployeeDetailsBO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Employee Details</h2>
+@Html.Raw(HttpUtility.HtmlDecode((Html.ValidationSummary(false, "", new { @class = "error" })).ToHtmlString()))
+
+<div class="col-xs-4">
+    @using (@Html.BeginForm())
+    {
+        @Html.TextBoxFor(x => x.FirstName, new
+   {
+       @class = "form-control  rounded-right",
+       @id = "txtFirstName",
+       placeholder = "First name",
+       required = "required",
+       style = "background: #fff;"
+   })
+        <br />
+        @Html.TextBoxFor(x => x.LastName, new
+   {
+       @class = "form-control  rounded-right",
+       @id = "txtLastName",
+       placeholder = "Last name",
+       required = "required",
+       style = "background: #fff;"
+   })
+        <br />
+
+            @Html.TextBoxFor(x => x.countryCode, new
+       {
+           @class = "form-control  rounded-right",
+           @id = "txtCountryCode",
+           placeholder = "Country code",
+           required = "required",
+           style = "background: #fff;"
+       })
+        <br />
+
+            @Html.TextBoxFor(x => x.MobileNumber, new
+       {
+           @class = "form-control  rounded-right",
+           @id = "txtMobile",
+           placeholder = "Mobile number",
+           required = "required",
+           style = "background: #fff;"
+       })
+            <br />
+            @Html.TextBoxFor(x => x.SSN, new
+       {
+           @class = "form-control  rounded-right",
+           @id = "txtSSN",
+           placeholder = "SSN number",
+           required = "required",
+           style = "background: #fff;"
+       })
+            <br />
+            <input type="submit" value="Save" class="btn btn-success" />
+            <input type="button" value="Cancel" class="btn btn-warning" />
+    }
+        </div>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<APEXUI.Models.EmployerBO>
+@{
+    ViewBag.Title = "EmployerDetails";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Rajkamal</h2>
+
+@foreach (var item in Model)
+{
+    <div>
+        <table id="table1">
+            <tr><td>@Html.DisplayFor(modelitem => item.Name)</td></tr>
+            <tr>
+                <td>@Html.DisplayFor(modelitem => item.WorkAdd.country)</td>
+                <td> To  </td>
+                <td>@Html.DisplayFor(modelitem => item.WorkAdd.city)</td>
+            </tr>
+        </table>
+
+    </div>
+    <div>
+        <table id="table2"></table>
+    </div>
+}

@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function insertNewWorkHistory() {
+
+        var companyName = $("#txtCompanyName").val();
+        var location = $("#txtLocation").val();
+        $("<div id='nextExperience'>you have worked with " + companyName + " located at " + location + " </div>").insertAfter("#exp1");
+    }
+</script>
+<style type="text/css">
+    table {
+        border: 3px solid red;
+    }
+
+    tr, td {
+        border: 0px !important;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2>
+            Work History
+        </h2>
+        @Html.Raw(HttpUtility.HtmlDecode((Html.ValidationSummary(false, "", new { @class = "error" })).ToHtmlString()))
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+            Add
+        </button>
+        <!-- Modal -->
+        <div id="exp1"></div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            Add Work History
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        @* Form design start here *@
+                        <b>Company Details</b><br />
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2"><input type="text" class="form-control" id="txtCompanyName" placeholder="Company Name" /></td>
+                                    <td><input type="text" class="form-control" id="txtLocation" placeholder="Company Address" /> </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="txtCity" class="form-control" placeholder="City" /> </td>
+                                    <td><input type="text" id="txtState" class="form-control" placeholder="State" /> </td>
+                                    <td><input type="text" id="txtCountry" class="form-control" placeholder="Country" /> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <b>Employment Details</b><br />
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" id="txtfromDate" placeholder="From Date" /></td>
+                                    <td>
+                                        <input type="text" class="form-control" id="txtToDate" placeholder="To Date" />
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="txtCurrentCompany">I Currently Work Here
+                                        </label>
+                                    </td>
+                                    <td><input type="text" class="form-control" id="txtDesignation" placeholder="Designation" /> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="text" class="form-control" id="txtEmpId" placeholder="Employee Id" /> </td>
+                                    <td>
+
+                                        <select class="form-control" id="ddlEmpType">
+                                            <option value="1">Permanent</option>
+                                            <option value="2">Internship</option>
+                                            <option value="3">PartTime</option>
+                                            <option value="4">Contract</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><textarea class="form-control" id="txtRolesResponsibilities"></textarea> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <b>Manager Details</b><br />
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3"><input type="text" class="form-control" id="txtManagerName" placeholder="Manager name" /></td>
+
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" id="txtManagerEmail" placeholder="Manager email" /> </td>
+                                    <td><input type="text" id="txtManagerCountryCode" class="form-control col-lg-2" placeholder="Country code" /> </td>
+                                    <td><input type="text" id="txtMobileNumber" class="form-control" placeholder="Contact number" /> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        @*<form>
+                                <input type="text" id="txtCompanyName" />
+
+                                <input type="text" id="txtLocation" />
+
+                                <input type="button" value="Save" class="btn btn-default" onclick="insertNewWorkHistory()" />
+                            </form>*@
+                        @* from design end here*@
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
